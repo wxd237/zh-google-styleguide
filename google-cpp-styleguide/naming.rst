@@ -24,7 +24,7 @@
 
         .. code-block:: c++
 
-            int n;                     // 莫名其妙。
+            int n;                     // 莫名其妙,简单变量只应在循环中使用。
             int nerr;                  // 怪缩写。
             int n_comp_conns;          // 怪缩写。
             int wgc_connections;       // 只有贵团队知道是啥意思。
@@ -40,41 +40,22 @@
 
     可接受的文件命名::
 
-        * my_useful_class.cc
-        * my-useful-class.cc
-        * myusefulclass.cc
-        * muusefulclass_test.cc // ``_unittest`` 和 ``_regtest`` 已弃用。
+        * my_useful_class.c
+        * my-useful-class.c
+        * myusefulclass.c
+        * muusefulclass_unittest.c //   ``_regtest`` 已弃用。
 
-    C++ 文件要以 ``.cc`` 结尾, 头文件以 ``.h`` 结尾. 专门插入文本的文件则以 ``.inc`` 结尾，参见:ref:`self-contained headers`。
+    C++ 文件要以 ``.c`` 结尾, 头文件以 ``.h`` 结尾. 专门插入文本的文件则以 ``.inc`` 结尾，参见:ref:`self-contained headers`。
 
     不要使用已经存在于 ``/usr/include`` 下的文件名 (Yang.Y 注: 即编译器搜索系统头文件的路径), 如 ``db.h``.
 
-    通常应尽量让文件名更加明确. ``http_server_logs.h`` 就比 ``logs.h`` 要好. 定义类时文件名一般成对出现, 如 ``foo_bar.h`` 和 ``foo_bar.cc``, 对应于类 ``FooBar``.
+    通常应尽量让文件名更加明确. ``http_server_logs.h`` 就比 ``logs.h`` 要好. 定义类时文件名一般成对出现, 如 ``foo_bar.h`` 和 ``foo_bar.c``, 对应于类 ``FooBar``.
 
     内联函数必须放在 ``.h`` 文件中. 如果内联函数比较短, 就直接放在 ``.h`` 中.
 
 6.3. 类型命名
 ~~~~~~~~~~~~~~~~~~~~~~
-
-.. tip::
-
-    类型名称的每个单词首字母均大写, 不包含下划线: ``MyExcitingClass``, ``MyExcitingEnum``.
-
-所有类型命名 —— 类, 结构体, 类型定义 (``typedef``), 枚举 —— 均使用相同约定. 例如:
-
-    .. code-block:: c++
-
-        // classes and structs
-        class UrlTable { ...
-        class UrlTableTester { ...
-        struct UrlTableProperties { ...
-
-        // typedefs
-        typedef hash_map<UrlTableProperties *, string> PropertiesMap;
-
-        // enums
-        enum UrlTableErrors { ...
-
+删除
 6.4. 变量命名
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -123,7 +104,7 @@
 
 全局变量:
 
-    对全局变量没有特别要求, 少用就好, 但如果你要用, 可以用 ``g_`` 或其它标志作为前缀, 以便更好的区分局部变量.
+    对全局变量没有特别要求, 最好少用，尽量不要用。但如果你要用, 可以用 ``g_`` 或其它标志作为前缀, 以便更好的区分局部变量.
 
 .. _constant-names:
 
@@ -183,12 +164,7 @@
 
 6.7. 名字空间命名
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. tip::
-
-    名字空间用小写字母命名, 并基于项目名称和目录结构: ``google_awesome_project``.
-
-关于名字空间的讨论和如何命名, 参考 :ref:`名字空间 <namespaces>` 一节.
+删除
 
 6.8. 枚举命名
 ~~~~~~~~~~~~~~~~~~~~~~
