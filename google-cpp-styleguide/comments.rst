@@ -5,6 +5,7 @@
 
 你写的注释是给代码读者看的: 下一个需要理解你的代码的人. 慷慨些吧, 下一个人可能就是你!
 
+
 7.1. 注释风格
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -43,28 +44,6 @@
 
 .. _class-comments:
 
-7.3. 类注释
-~~~~~~~~~~~~~~~~~~
-
-.. tip::
-
-    每个类的定义都要附带一份注释, 描述类的功能和用法.
-
-.. code-block:: c++
-
-    // Iterates over the contents of a GargantuanTable.  Sample usage:
-    //    GargantuanTable_Iterator* iter = table->NewIterator();
-    //    for (iter->Seek("foo"); !iter->done(); iter->Next()) {
-    //      process(iter->key(), iter->value());
-    //    }
-    //    delete iter;
-    class GargantuanTable_Iterator {
-        ...
-    };
-
-如果你觉得已经在文件顶部详细描述了该类, 想直接简单的来上一句 "完整描述见文件顶部" 也不打紧, 但务必确保有这类注释.
-
-如果类有任何同步前提, 文档说明之. 如果该类的实例可被多线程访问, 要特别注意文档说明多线程环境下相关的规则和常量使用.
 
 7.4. 函数注释
 ~~~~~~~~~~~~~~~~~~~~~~
