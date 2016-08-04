@@ -45,9 +45,9 @@
         * myusefulclass.c
         * muusefulclass_unittest.c //   ``_regtest`` 已弃用。
 
-    C++ 文件要以 ``.c`` 结尾, 头文件以 ``.h`` 结尾. 专门插入文本的文件则以 ``.inc`` 结尾，参见:ref:`self-contained headers`。
+    C 文件要以 ``.c`` 结尾, 头文件以 ``.h`` 结尾. 专门插入文本的文件则以 ``.inc`` 结尾，参见:ref:`self-contained headers`。
 
-    不要使用已经存在于 ``/usr/include`` 下的文件名 (Yang.Y 注: 即编译器搜索系统头文件的路径), 如 ``db.h``.
+    不要使用已经存在于 ``/usr/include`` 下的文件名 (Yang.Y 注: 即编译器搜索系统头文件的路径), 如 ``stdio.h``.
 
     通常应尽量让文件名更加明确. ``http_server_logs.h`` 就比 ``logs.h`` 要好. 定义类时文件名一般成对出现, 如 ``foo_bar.h`` 和 ``foo_bar.c``, 对应于类 ``FooBar``.
 
@@ -75,19 +75,6 @@
 
             string tableName;   // 差 - 混合大小写。
 
-类数据成员：
-
-    不管是静态的还是非静态的，类数据成员都可以和普通变量一样, 但要接下划线。
-
-        .. code-block:: c++
-
-            class TableInfo {
-              ...
-             private:
-              string table_name_;  // 可 - 尾后加下划线。
-              string tablename_;   // 可。
-              static Pool<TableInfo>* pool_;  // 可。
-            };
 
 结构体变量:
 
