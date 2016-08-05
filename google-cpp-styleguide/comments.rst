@@ -5,6 +5,8 @@
 
 你写的注释是给代码读者看的: 下一个需要理解你的代码的人. 慷慨些吧, 下一个人可能就是你!
 
+文档注释和函数注释要用在Doxygen生成文档，建议安装DoxygenToolkit.vim插件来生成注释摩板。
+
 
 7.1. 注释风格
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -25,12 +27,13 @@
 法律公告和作者信息:
 
     每个文件都应该包含以下项, 依次是:
+    
+        - 作者(author): 标识文件的原始作者.
+        - 日期(date): 标识文件的创建日期. 
+        - 简介(brief):  文件的简单说明
 
-        - 版权声明 (比如, ``Copyright 2008 Google Inc.``)
 
-        - 许可证. 为项目选择合适的许可证版本 (比如, Apache 2.0, BSD, LGPL, GPL)
-
-        - 作者: 标识文件的原始作者.
+ 
 
     如果你对原始作者的文件做了重大修改, 将你的信息添加到作者信息里. 这样当其他人对该文件有疑问时可以知道该联系谁.
 
@@ -38,11 +41,22 @@
 
     紧接着版权许可和作者信息之后, 每个文件都要用注释描述文件内容.
 
-    通常, ``.h`` 文件要对所声明的类的功能和用法作简单说明. ``.cc`` 文件通常包含了更多的实现细节或算法技巧讨论,  如果你感觉这些实现细节或算法技巧讨论对于理解 ``.h`` 文件有帮助, 可以将该注释挪到 ``.h``, 并在 ``.cc`` 中指出文档在 ``.h``.
+    通常, ``.h`` 文件要对所声明的类的功能和用法作简单说明. ``.c`` 文件通常包含了更多的实现细节或算法技巧讨论,  如果你感觉这些实现细节或算法技巧讨论对于理解 ``.h`` 文件有帮助, 可以将该注释挪到 ``.h``, 并在 ``.c`` 中指出文档在 ``.h``.
 
-    不要简单的在 ``.h`` 和 ``.cc`` 间复制注释. 这种偏离了注释的实际意义.
+    不要简单的在 ``.h`` 和 ``.c`` 间复制注释. 这种偏离了注释的实际意义.
 
 .. _class-comments:
+
+        - @addtogroup  cms_api
+
+        - @{
+        - @file   cardnum.c
+        - @brief   持卡数检查
+        - @version
+        - @author   作者
+        - @date     日期
+          持卡数相信关API  
+          
 
 
 7.4. 函数注释
@@ -59,7 +73,6 @@
     函数声明处注释的内容:
 
         - 函数的输入输出.
-        - 对类成员函数而言: 函数调用期间对象是否需要保持引用参数, 是否会释放这些参数.
         - 如果函数分配了空间, 需要由调用者释放.
         - 参数是否可以为 ``NULL``.
         - 是否存在函数使用上的性能隐患.
@@ -68,31 +81,25 @@
     举例如下:
 
         .. code-block:: c++
-
-            // Returns an iterator for this table.  It is the client's
-            // responsibility to delete the iterator when it is done with it,
-            // and it must not use the iterator once the GargantuanTable object
-            // on which the iterator was created has been deleted.
-            //
-            // The iterator is initially positioned at the beginning of the table.
-            //
-            // This method is equivalent to:
-            //    Iterator* iter = table->NewIterator();
-            //    iter->Seek("");
-            //    return iter;
-            // If you are going to immediately seek to another place in the
-            // returned iterator, it will be faster to use NewIterator()
-            // and avoid the extra seek.
-            Iterator* GetIterator() const;
+        
+        /*!
+         * @brief 传入文件的路径，返回文件名
+         * @note  outfile分配的内存，请在用完后释放outfile
+         * @paramin absolu_path  文件的路径
+         * @paramout outfile    文件名
+         * @paramin  havExt  是否含扩展名
+         *
+        int getfilename(const char *absolu_path,char ** oufile,int havExt){
+            ...
+         }
 
     但也要避免罗罗嗦嗦, 或做些显而易见的说明. 下面的注释就没有必要加上 "returns false otherwise", 因为已经暗含其中了:
 
         .. code-block:: c++
 
-            // Returns true if the table cannot hold any more entries.
-            bool IsTableFull();
+            // 返回SUCCESS 如果是贷款卡.
+            bool IsLnsCard();
 
-    注释构造/析构函数时, 切记读代码的人知道构造/析构函数是干啥的, 所以 "destroys this object" 这样的注释是没有意义的. 注明构造函数对参数做了什么 (例如, 是否取得指针所有权) 以及析构函数清理了什么. 如果都是些无关紧要的内容, 直接省掉注释. 析构函数前没有注释是很正常的.
 
 函数定义:
 
@@ -107,17 +114,6 @@
 
     通常变量名本身足以很好说明变量用途. 某些情况下, 也需要额外的注释说明.
 
-类数据成员:
-
-    每个类数据成员 (也叫实例变量或成员变量) 都应该用注释说明用途. 如果变量可以接受 ``NULL`` 或 ``-1`` 等警戒值, 须加以说明. 比如:
-
-        .. code-block:: c++
-
-            private:
-                // Keeps track of the total number of entries in the table.
-                // Used to ensure we do not go over the limit. -1 means
-                // that we don't yet know how many entries the table has.
-                int num_total_entries_;
 
 
 全局变量:
@@ -126,8 +122,8 @@
 
         .. code-block:: c++
 
-            // The total number of tests cases that we run through in this regression test.
-            const int kNumTestCases = 6;
+            //    日志buffer
+            const int g_acTrcMsg[1000];
 
 7.6. 实现注释
 ~~~~~~~~~~~~~~~~~~~~~~
