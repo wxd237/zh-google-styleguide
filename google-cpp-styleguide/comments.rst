@@ -49,13 +49,13 @@
 
          @addtogroup  cms_api
 
-         @{
-         @file   cardnum.c
-         @brief   持卡数检查
-         @version
-         @author   作者
-         @date     日期
-          持卡数相信关API  
+        @{
+        @file   cardnum.c
+        @brief   持卡数检查
+        @version
+        @author   作者
+        @date     日期
+        持卡数相信关API  
           
 
 
